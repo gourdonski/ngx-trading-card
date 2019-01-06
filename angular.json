@@ -1,0 +1,170 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ngx-trading-card": {
+      "root": "projects/ngx-trading-card",
+      "sourceRoot": "projects/ngx-trading-card/src",
+      "projectType": "library",
+      "prefix": "tc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-trading-card/tsconfig.lib.json",
+            "project": "projects/ngx-trading-card/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-trading-card/src/test.ts",
+            "tsConfig": "projects/ngx-trading-card/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-trading-card/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-trading-card/tsconfig.lib.json",
+              "projects/ngx-trading-card/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "destiny-trading-card": {
+      "root": "projects/destiny-trading-card/",
+      "sourceRoot": "projects/destiny-trading-card/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/destiny-trading-card",
+            "index": "projects/destiny-trading-card/src/index.html",
+            "main": "projects/destiny-trading-card/src/main.ts",
+            "polyfills": "projects/destiny-trading-card/src/polyfills.ts",
+            "tsConfig": "projects/destiny-trading-card/tsconfig.app.json",
+            "assets": [
+              "projects/destiny-trading-card/src/favicon.ico",
+              "projects/destiny-trading-card/src/assets"
+            ],
+            "styles": [
+              "projects/destiny-trading-card/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/destiny-trading-card/src/environments/environment.ts",
+                  "with": "projects/destiny-trading-card/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "destiny-trading-card:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "destiny-trading-card:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "destiny-trading-card:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/destiny-trading-card/src/test.ts",
+            "polyfills": "projects/destiny-trading-card/src/polyfills.ts",
+            "tsConfig": "projects/destiny-trading-card/tsconfig.spec.json",
+            "karmaConfig": "projects/destiny-trading-card/karma.conf.js",
+            "styles": [
+              "projects/destiny-trading-card/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/destiny-trading-card/src/favicon.ico",
+              "projects/destiny-trading-card/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/destiny-trading-card/tsconfig.app.json",
+              "projects/destiny-trading-card/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "destiny-trading-card-e2e": {
+      "root": "projects/destiny-trading-card-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/destiny-trading-card-e2e/protractor.conf.js",
+            "devServerTarget": "destiny-trading-card:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "destiny-trading-card:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/destiny-trading-card-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ngx-trading-card"
+}
